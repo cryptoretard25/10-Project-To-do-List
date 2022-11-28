@@ -1,13 +1,17 @@
 const {log} = console;
-
-import {Todo} from './todos.js'
+import {ProjectDOM, todoBack} from './modules/ui'
 import './style.css'
 
-function createTask(title, description, dueDate, priority){
-  return new Todo(title, description, dueDate, priority)
-}
+const uiHandler = (()=>{
+  const inboxBtn = document.querySelector('#inbox-btn')
+  const todayBtn = document.querySelector('#today-btn')
+  const thisWeekBtn = document.querySelector('#thisweek-btn')
+  
+  ProjectDOM.createStaticProject(todoBack.getProject('Inbox') , inboxBtn);
+  ProjectDOM.createStaticProject(todoBack.getProject('Today'), todayBtn);
+  ProjectDOM.createStaticProject(todoBack.getProject('This week'), thisWeekBtn);
+  ProjectDOM.updateDOM()
 
-const task1 = createTask('My first To do', 'This is my first created Todo', '11-11-2022', 'high')
-task1.complete=true;
-log(task1.complete)
-log(task1)
+  const onload =(() => inboxBtn.click())();
+})()
+

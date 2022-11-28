@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -15,6 +16,11 @@ module.exports = {
       title: 'To Do List',
       favicon: './src/logo/logo.svg',
       template: './src/template.html',
+    }),
+    new CopyWebpackPlugin({
+      'patterns': [
+        {from: './src/img', to: 'img'}
+      ]
     })
   ],
   output: {
