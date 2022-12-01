@@ -225,6 +225,16 @@ class TaskDOM {
       f(second);
     };
 
+    const isCompleted = ()=>{
+      if (task.getComplete()){ 
+        //taskEl.classList.add('green');
+        title.style.textDecoration = 'line-through';
+        date.style.textDecoration = 'line-through';
+        complete.id = 'o-clicked';
+        
+      }
+    }
+
     const properties = (() => {
       taskEl.className = "task";
       complete.id = "o";
@@ -308,6 +318,7 @@ class TaskDOM {
     date.textContent = task.getDueDate();
 
     taskEl.append(complete, title, titleInput, date, dateInput, close);
+    isCompleted();
     this.taskList.append(taskEl);
   }
 
@@ -349,6 +360,7 @@ class TaskDOM {
     })
     temp = temp.flat();
     today.setTasks(temp);
+    todoBack.getProjects().forEach(project => project.sortByCompleted())
   }
 
   static thisWeekDOM(){
@@ -361,6 +373,7 @@ class TaskDOM {
     })
     temp = temp.flat();
     thisWeek.setTasks(temp);
+    todoBack.getProjects().forEach(project => project.sortByCompleted())
     log(temp)
   }
   //--------------------------------------------------------------------------------------------------
@@ -371,12 +384,14 @@ class TaskDOM {
     const project = this.currentProject();
     const task = project.getTaskByUID(uid);
     task.setCompleted();
-    project.addCompleted(task);
-    element.remove();
+    //project.addCompleted(task);
+    //element.remove();
+    todoBack.getProjects().forEach(project => project.sortByCompleted())
     //Storage
     Storage.saveTodoBack(todoBack);
 
-    log(project);
+    this.updateDOM();
+    log(task);
   }
 
   static changeTitle(element) {
@@ -565,4 +580,4 @@ class ProjectDOM {
   //---------------------------------------------------------------------------------------------
 }
 
-export { CreateAddTask, CreateAddProject, TaskDOM, ProjectDOM, todoBack};
+export {ProjectDOM, todoBack};

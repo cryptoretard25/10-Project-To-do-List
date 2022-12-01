@@ -15,7 +15,7 @@ export default class Todo {
   }
 
   setCompleted(){
-    this.completed = true;
+    this.completed = !this.completed? true: false;
   }
 
   getTitle(){

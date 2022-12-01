@@ -70,8 +70,12 @@ export default class Project {
   }
 
   addCompleted(task){
-    this.removeTask(task.uid);
+    //this.removeTask(task.uid);
     this.completed.push(task);
+  }
+
+  sortByCompleted(){
+    this.getTasks().sort((a, b) => b.completed - a.completed)
   }
 
   removeTask(uid){
