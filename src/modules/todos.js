@@ -39,6 +39,7 @@ export default class Todo {
   }
   
   getDueDate(){
+    if(this.dueDate === ''){this.setDueDate('No date')}
     const arr = this.dueDate.split("-");
     return arr.length > 1 ? `${arr[2]}/${arr[1]}/${arr[0]}` : `${arr[0]}`;
   }

@@ -83,7 +83,7 @@ export default class Project {
   }
 
   removeCompleted(uid){
-    this.completed = this.completed.filter(todo => todo !== todo.uid);  
+    this.completed = this.completed.filter(todo => todo.uid !== uid);  
   }
 
   todayTasks(){
